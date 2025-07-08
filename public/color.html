@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta
+			name="viewport"
+			content="width=device-width, initial-scale=1.0"
+		/>
+		<title>Document</title>
+	</head>
+	<body
+		style="
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			flex-direction: column;
+			height: 100vh;
+		"
+	>
+		<div
+			id="main"
+			class="container"
+		>
+			<div
+				class="hex"
+				style="display: flex; flex-direction: row; margin-block: 10px"
+			>
+				<div
+					class="label"
+					style="width: 50px"
+				>
+					HEX:
+				</div>
+				<div
+					id="hex"
+					style="user-select: text; cursor: text; width: 150px"
+				></div>
+				<button
+					style="margin-left: 80px"
+					onclick="copyColor(this)"
+				>
+					Copy
+				</button>
+			</div>
+			<div
+				class="rgb"
+				style="display: flex; flex-direction: row; margin-block: 10px"
+			>
+				<div
+					class="label"
+					style="width: 50px"
+				>
+					RGB:
+				</div>
+				<div
+					id="rgb"
+					style="user-select: text; cursor: text; width: 150px"
+				></div>
+				<button
+					style="margin-left: 80px"
+					onclick="copyColor(this)"
+				>
+					Copy
+				</button>
+			</div>
+			<div
+				class="hsl"
+				style="display: flex; flex-direction: row; margin-block: 10px"
+			>
+				<div
+					class="label"
+					style="width: 50px"
+				>
+					HSL:
+				</div>
+				<div
+					id="hsl"
+					style="user-select: text; cursor: text; width: 150px"
+				></div>
+				<button
+					style="margin-left: 80px"
+					onclick="copyColor(this)"
+				>
+					Copy
+				</button>
+			</div>
+		</div>
+		<button
+			style="margin: 20px; padding: 10px 20px"
+			onclick="getColor()"
+		>
+			New color
+		</button>
+	</body>
+	<script>
+		const copyColor = (button) => {
+			const textToCopy = button.previousElementSibling.textContent
+			navigator.clipboard.writeText(textToCopy)
+		}
+
+		const getColor = async () => {
+			const hexField = document.getElementById('hex')
+			const rgbField = document.getElementById('rgb')
+			const hslField = document.getElementById('hsl')
+			const body = document.body
+
+			const res = await fetch('/color/api')
+			const data = await res.json()
+
+			hexField.textContent = `${data.hex}`
+			rgbField.textContent = `rgb(${data.rgb})`
+			hslField.textContent = `hsl(${data.hsl})`
+
+			body.style.backgroundColor = data.hex
+		}
+
+		getColor()
+	</script>
+</html>
