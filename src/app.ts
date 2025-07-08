@@ -1,6 +1,6 @@
 require('dotenv').config()
 
-import express from 'express'
+import express, { Request, Response } from 'express'
 import cors from 'cors'
 import path from 'path'
 
@@ -34,15 +34,15 @@ const getRandomHsl = (): string => {
 	return `${h}, ${s}, ${l}`
 }
 
-app.get('/', (req, res) => {
+app.get('/', (req: Request, res: Response) => {
 	res.send('Hello World!!!!!!!')
 })
 
-app.get('/about', (req, res) => {
+app.get('/about', (req: Request, res: Response) => {
 	res.send('About AsdPage')
 })
 
-app.get('/color', (req, res) => {
+app.get('/color', (req: Request, res: Response) => {
 	res.sendFile(path.join(__dirname, '../public/color.html'))
 })
 
