@@ -34,18 +34,6 @@ const getRandomHsl = (): string => {
 	return `${h}, ${s}, ${l}`
 }
 
-app.get('/', (req: Request, res: Response) => {
-	res.send('Hello World!!!!!!!')
-})
-
-app.get('/about', (req: Request, res: Response) => {
-	res.send('About AsdPage')
-})
-
-app.get('/color', (req: Request, res: Response) => {
-	res.sendFile(path.join(__dirname, '../public/color.html'))
-})
-
 type ColorResponse = {
 	hex: string
 	rgb: string
@@ -70,4 +58,16 @@ app.get('/login/:username', (req, res) => {
 
 app.listen(port, () => {
 	console.log(`Example app listening on port ${port}`)
+})
+
+app.get('/', (req: Request, res: Response) => {
+	res.send('Hello World!!!!!!!')
+})
+
+app.get('/about', (req: Request, res: Response) => {
+	res.send('About AsdPage')
+})
+
+app.get('/color', (req: Request, res: Response) => {
+	res.sendFile(path.join(__dirname, '../public/color.html'))
 })
