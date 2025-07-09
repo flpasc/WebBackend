@@ -46,7 +46,13 @@ app.get('/color', (req: Request, res: Response) => {
 	res.sendFile(path.join(__dirname, '../public/color.html'))
 })
 
-app.get('/color/api', (req, res) => {
+type ColorResponse = {
+	hex: string
+	rgb: string
+	hsl: string
+}
+
+app.get('/color/api', (req, res: Response<ColorResponse>) => {
 	const randomHEX = getRandomHex()
 	const randomRGB = getRandomRgb()
 	const randomHSL = getRandomHsl()
